@@ -105,12 +105,35 @@
   function showToast(message) { const toast = $('.toast'); toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3600); }
   function setupContact() {
     const form = $('.contact-form');
-    form.addEventListener('submit', event => {
-      event.preventDefault(); const data = new FormData(form), name = String(data.get('name') || '').trim(), email = String(data.get('email') || '').trim(), message = String(data.get('message') || '').trim();
-      if (!name) return showToast('Please enter your name.');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast('Please enter a valid email address.');
-      if (!message) return showToast('Please add a message.');
-      showToast('Thanks! Your message is ready to send.'); form.reset();
+    const submitButton = $('button[type="submit"]', form);
+    const originalButtonHTML = submitButton.innerHTML;
+    form.addEventListener('submit', async event => {
+      // The browser handles required fields and email format before this event.
+      event.preventDefault();
+      if (submitButton.disabled) return;
+
+      if (form.action.includes('YOUR_FORM_ID')) {
+        showToast('Set your Formspree Form ID in index.html to enable submissions.');
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending…';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error(`Formspree returned ${response.status}`);
+        form.reset();
+        showToast("Message sent successfully! I'll get back to you soon.");
+      } catch (error) {
+        showToast('Something went wrong. Please try again.');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonHTML;
+      }
     });
   }
 
