@@ -86,7 +86,8 @@
 
   const projects = {
     weather: { number: 'PROJECT 01', title: 'Weather Application', description: 'Built a web-based weather application using HTML, CSS, and JavaScript with real-time API integration to display current weather conditions for searched cities.', technologies: ['HTML', 'CSS', 'JavaScript', 'Weather API'], github: 'https://github.com/ganesanravi2005-creator/Weather-app' },
-    library: { number: 'PROJECT 02', title: 'Library Management System', description: 'Developed a Java-based Library Management System using Java, JDBC, and MySQL to manage book records, track issue/return transactions, and maintain member details, with a full-stack interface built using HTML, CSS, and JavaScript for the frontend and Spring Boot for backend REST APIs.', technologies: ['Java', 'JDBC', 'MySQL', 'Spring Boot', 'HTML', 'CSS', 'JavaScript', 'REST API'], github: 'https://github.com/ganesanravi2005-creator/LibraryManagementSystem' }
+    library: { number: 'PROJECT 02', title: 'Library Management System', description: 'Developed a Java-based Library Management System using Java, JDBC, and MySQL to manage book records, track issue/return transactions, and maintain member details, with a full-stack interface built using HTML, CSS, and JavaScript for the frontend and Spring Boot for backend REST APIs.', technologies: ['Java', 'JDBC', 'MySQL', 'Spring Boot', 'HTML', 'CSS', 'JavaScript', 'REST API'], github: 'https://github.com/ganesanravi2005-creator/LibraryManagementSystem' },
+    luxora: { number: 'PROJECT 03 · E-COMMERCE', title: 'LUXORA — Premium E-commerce Website', description: 'A premium fashion e-commerce concept with an elegant, modern, responsive shopping interface. Features include product collections, new arrivals, product search, a wishlist, and a shopping bag. Role: UI/UX Design and Frontend Development.', technologies: ['React.js', 'JavaScript', 'HTML5', 'CSS3', 'Responsive Design', 'E-commerce UI'], github: 'https://github.com/ganesanravi2005-creator/E-commerce.git' }
   };
   function setupModal() {
     const backdrop = $('.modal-backdrop'), close = $('.modal-close'); let previousFocus;
@@ -94,7 +95,9 @@
     $$('.detail-trigger').forEach(trigger => trigger.addEventListener('click', () => {
       const project = projects[trigger.dataset.project]; previousFocus = trigger;
       $('#modal-number').textContent = project.number; $('#modal-title').textContent = project.title; $('#modal-description').textContent = project.description;
-      $('#modal-tech').innerHTML = project.technologies.map(technology => `<span>${technology}</span>`).join(''); $('#modal-github').href = project.github;
+      $('#modal-tech').innerHTML = project.technologies.map(technology => `<span>${technology}</span>`).join('');
+      const githubLink = $('#modal-github'); githubLink.hidden = !project.github;
+      if (project.github) githubLink.href = project.github;
       backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; close.focus();
     }));
     close.addEventListener('click', dismiss); backdrop.addEventListener('click', event => { if (event.target === backdrop) dismiss(); });
