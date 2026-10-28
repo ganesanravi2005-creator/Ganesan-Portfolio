@@ -1047,6 +1047,82 @@ button {
     color: var(--muted)
 }
 
+.certificate-card {
+    min-height: 370px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(145deg, var(--surface), var(--surface-2));
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .16);
+    transition: transform .25s, border-color .25s, box-shadow .25s
+}
+
+.certificate-card:hover {
+    border-color: rgba(34, 211, 238, .48);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, .22), 0 0 24px rgba(34, 211, 238, .1)
+}
+
+.certificate-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px
+}
+
+.certificate-heading .cert-icon {
+    flex: 0 0 auto;
+    margin: 0
+}
+
+.certificate-type {
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-align: right
+}
+
+.certificate-card h3 {
+    margin: 0 0 7px
+}
+
+.certificate-description {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0 0 18px
+}
+
+.certificate-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px 10px;
+    margin: 0 0 20px
+}
+
+.certificate-meta div {
+    min-width: 0
+}
+
+.certificate-meta dt {
+    color: var(--muted);
+    font-size: 9px
+}
+
+.certificate-meta dd {
+    margin: 2px 0 0;
+    font-size: 10px;
+    font-weight: 600;
+    overflow-wrap: anywhere
+}
+
+.certificate-link {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 8px 11px;
+    gap: 10px
+}
+
 .why-grid {
     grid-template-columns: repeat(4, 1fr)
 }
@@ -1537,6 +1613,10 @@ button {
 }
 
 @media(max-width:980px) {
+    .cert-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
     .nav-links {
         gap: 13px
     }
