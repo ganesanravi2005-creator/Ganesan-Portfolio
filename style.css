@@ -2008,7 +2008,7 @@ button {
         grid-template-columns: 1fr
     }
 
-    .cert-card {
+    .cert-card:not(.certificate-card) {
         min-height: 185px
     }
 
